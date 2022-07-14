@@ -1,21 +1,25 @@
-import ray  # install tensorflow beforehand manually
-# install CUDA manually - for GPU support
-
+# install tensorflow beforehand manually
+# install CUDA manually - for GPU support conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 (https://www.tensorflow.org/install/pip#windows_1)
+import ray
 from ray import tune
 import os
 
+# configuration and init
 ray.init(ignore_reinit_error=True)
 log_dir = "log_run"
 log_path = os.path.join(os.getcwd(), log_dir)
+env = "Taxi-v3"
+seed = 123
 
+##########################################################################################
 
 # run without GPU
 print("Start RL with GPU ")
 tune.run("DQN",
          config={
-             "env": "CartPole-v1",
+             "env": env,
              "num_gpus": 1,  # with gpu
-             "seed": 123,
+             "seed": seed,
              # "evaluation_interval": 2,
              # "evaluation_duration": 10
          },
@@ -30,9 +34,9 @@ tune.run("DQN",
 print("Start RL without GPU ")
 tune.run("DQN",
          config={
-             "env": "CartPole-v1",
+             "env": env,
              "num_gpus": 0,  # no gpu
-             "seed": 123,
+             "seed": seed,
              # "evaluation_interval": 2,
              # "evaluation_duration": 10
          },

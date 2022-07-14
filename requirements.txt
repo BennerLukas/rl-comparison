@@ -1,1 +1,2 @@
+tensorflow
 ray # installs automatically gym in working version

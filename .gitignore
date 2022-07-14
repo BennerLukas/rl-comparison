@@ -128,3 +128,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/src/log_run/no_GPU/
+/src/log_run/with_GPU/

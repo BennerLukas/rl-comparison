@@ -10,11 +10,11 @@ log_dir = "log_run"
 log_path = os.path.join(os.getcwd(), log_dir)
 env = "Taxi-v3"
 seed = 123
-
+max_iter = 100
 ##########################################################################################
 
 # run without GPU
-print("Start RL with GPU ")
+print("--Start RL with GPU--")
 tune.run("DQN",
          config={
              "env": env,
@@ -25,13 +25,13 @@ tune.run("DQN",
          },
          local_dir=log_dir,
          name="with_GPU",
-         stop=ray.tune.stopper.MaximumIterationStopper(10),
+         stop=ray.tune.stopper.MaximumIterationStopper(max_iter),
          # time_budget_s=100
          )
 
 
 # run without GPU
-print("Start RL without GPU ")
+print("--Start RL without GPU--")
 tune.run("DQN",
          config={
              "env": env,
@@ -42,7 +42,7 @@ tune.run("DQN",
          },
          local_dir=log_dir,
          name="no_GPU",
-         stop=ray.tune.stopper.MaximumIterationStopper(10),
+         stop=ray.tune.stopper.MaximumIterationStopper(max_iter),
          )
 
 pass
